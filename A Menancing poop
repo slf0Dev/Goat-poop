@@ -1,0 +1,63 @@
+--Variables
+local itemsPath = game:GetService("Workspace").Asda;
+local plr = game.Players.LocalPlayer
+local char = plr:WaitForChild("Character")
+
+local lib = loadstring(game:HttpGet("https://github.com/slf0Dev/SLF-library-performance/raw/main/lib%20core"))()
+
+--Tables
+
+_G.Toggles = {
+    ["ItemFarm"] = false
+}
+
+_G.Pickups = {
+    ["Banknote"] = true,
+    ["Arrow"] = true,
+    ["Requiem Arrow"] = true,
+    ["Rokakaka Fruit"] = true,
+    ["Tricky"] = true,
+    ["NightmareDiary"] = true,
+    ["Shiny Diary"] = true,
+    ["Gold!"] = true,
+    ["Frog"] = true,
+    ["DIO's Diary"] = true,
+    ["Vampire Mask"] = true,
+    ["Water"] = true,
+    ["TrollFace"] = true,
+    ["Potato"] = true
+    }
+    
+    --main code
+    function FarmItems()
+        while _G.Toggles["ItemFarm"] do wait(0.05)
+            for i,v in next,itemsPath:GetChildren() do
+                for _,item in next,_G.Pickups do
+                    if v.Handle and v.Parent == itemsPath and _ == v.Name and item == true then
+                        char.HumanoidRootPart.CFrame = v.Handle.CFrame
+                    end
+                end
+            end
+        end
+    end
+
+    -- Creating GUI
+
+    local MainWindow = lib:Window("Ocerium")
+    
+    local ItemFolder = MainWindow:Folder("Items")
+
+    local FarmingToggle = ItemFolder:Toggle("Items Farm",function(bool)
+        _G.Toggles["ItemFarm"] = bool
+        spawn(FarmItems)
+    end,false)
+
+    local FilterWindow = lib:Window("Items Filter")
+
+    local FilterFolder = FilterWindow:Folder("Filter items")
+
+    for i,v in next,_G.Pickups do
+        local filterToggle = FilterFolder:Toggle(i,function(bool)
+            _G.Pickups[i] = bool
+        end,true)
+    end
