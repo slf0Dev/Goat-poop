@@ -1,7 +1,6 @@
 --Variables
 local itemsPath = game:GetService("Workspace").Asda;
 local plr = game.Players.LocalPlayer
-local char = plr:WaitForChild("Character")
 
 local lib = loadstring(game:HttpGet("https://github.com/slf0Dev/SLF-library-performance/raw/main/lib%20core"))()
 
@@ -34,7 +33,7 @@ _G.Pickups = {
             for i,v in next,itemsPath:GetChildren() do
                 for _,item in next,_G.Pickups do
                     if v.Handle and v.Parent == itemsPath and _ == v.Name and item == true then
-                        char.HumanoidRootPart.CFrame = v.Handle.CFrame
+                        plr.Character.HumanoidRootPart.CFrame = v.Handle.CFrame
                     end
                 end
             end
