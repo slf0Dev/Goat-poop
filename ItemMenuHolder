@@ -1,0 +1,165 @@
+local ListOfThings = {}
+
+
+function ListOfThings:ListCreate()
+local ItemsMenu = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local ListOfItems = Instance.new("ScrollingFrame")
+local UIGridLayout = Instance.new("UIGridLayout")
+local UICorner_2 = Instance.new("UICorner")
+
+--Properties:
+
+ItemsMenu.Name = "ItemsMenu"
+ItemsMenu.Parent = game.CoreGui
+ItemsMenu.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ItemsMenu
+MainFrame.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+MainFrame.BorderSizePixel = 0
+MainFrame.ClipsDescendants = true
+MainFrame.Position = UDim2.new(0.266726136, 0, 0.16744186, 0)
+MainFrame.Size = UDim2.new(0, 651, 0, 421)
+
+ListOfItems.Name = "ListOfItems"
+ListOfItems.Parent = MainFrame
+ListOfItems.Active = true
+ListOfItems.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ListOfItems.BackgroundTransparency = 1.000
+ListOfItems.BorderSizePixel = 0
+ListOfItems.ClipsDescendants = false
+ListOfItems.Position = UDim2.new(0.0107526882, 0, 0.0166270789, 0)
+ListOfItems.Size = UDim2.new(0.980030715, 0, 0.966745853, 0)
+ListOfItems.ScrollBarThickness = 5
+ListOfItems.CanvasSize = UDim2.new(0,0,0,0)
+ListOfItems.AutomaticCanvasSize = Enum.AutomaticSize.Y
+UIGridLayout.Parent = ListOfItems
+UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+
+UICorner_2.Parent = MainFrame
+	
+	
+	local Canvs = 0
+    local ObjectsCount = 0
+	local ThingsAdd = {}
+	
+	function ThingsAdd:Refresh()
+		for i,v in next,ListOfItems:GetChildren() do
+			if v and v.Parent and v:IsA("Frame") then
+			v:Destroy()
+			end
+		end
+	end
+	function ThingsAdd:AddObject(img,Name,Level,Upgrade,callback)
+		local ExampleItem = Instance.new("Frame")
+		local ClickButton = Instance.new("TextButton")
+		local ItemImage = Instance.new("ImageLabel")
+		local UIGradient = Instance.new("UIGradient")
+		local UICorner = Instance.new("UICorner")
+		local Lvl = Instance.new("TextLabel")
+		local UICorner_2 = Instance.new("UICorner")
+		local TXT = Instance.new("TextLabel")
+		local UICorner_3 = Instance.new("UICorner")
+		local Upgr = Instance.new("TextLabel")
+		local UICorner_4 = Instance.new("UICorner")
+		local UIStroke = Instance.new("UIStroke")
+
+        ObjectsCount += 1
+        local ObjectNumber = ObjectsCount
+        if  ObjectNumber > 24 then
+            print'd'
+        end
+		ExampleItem.Name = Name , Upgrade or nil
+		ExampleItem.Parent = ListOfItems
+		ExampleItem.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		ExampleItem.BackgroundTransparency = 0.550
+		ExampleItem.BorderSizePixel = 0
+		ExampleItem.Size = UDim2.new(0, 100, 0, 100)
+
+		UIStroke.Parent = ExampleItem
+		UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+		UIStroke.LineJoinMode = Enum.LineJoinMode.Round
+		UIStroke.Thickness = 1
+		UIStroke.Transparency = 0
+
+		ClickButton.Name = "ClickButton"
+		ClickButton.Parent = ExampleItem
+		ClickButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		ClickButton.BackgroundTransparency = 1.000
+		ClickButton.BorderSizePixel = 0
+		ClickButton.Size = UDim2.new(1, 0, 1, 0)
+		ClickButton.AutoButtonColor = false
+		ClickButton.Font = Enum.Font.SourceSans
+		ClickButton.LineHeight = 0.000
+		ClickButton.Text = ""
+		ClickButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+		ClickButton.TextSize = 14.000
+		ClickButton.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+		ClickButton.TextWrapped = true
+		ClickButton.TextYAlignment = Enum.TextYAlignment.Bottom
+		ClickButton.MouseButton1Click:Connect(function()
+			spawn(function() callback(Name) end)
+		end)
+
+		ItemImage.Name = "ItemImage"
+		ItemImage.Parent = ExampleItem
+		ItemImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		ItemImage.BackgroundTransparency = 1.000
+		ItemImage.BorderSizePixel = 0
+		ItemImage.Size = UDim2.new(1, 0, 1, 0)
+		ItemImage.Image = img
+		ItemImage.ScaleType = Enum.ScaleType.Fit
+
+		UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 229, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
+		UIGradient.Parent = ExampleItem
+
+		UICorner.Parent = ExampleItem
+
+		Lvl.Name = "Lvl"
+		Lvl.Parent = ExampleItem
+		Lvl.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Lvl.BackgroundTransparency = 0.700
+		Lvl.BorderSizePixel = 0
+		Lvl.Size = UDim2.new(0.389999986, 0, 0.189999998, 0)
+		Lvl.Font = Enum.Font.Arial
+		Lvl.Text = Level
+		Lvl.TextColor3 = Color3.fromRGB(61, 61, 61)
+		Lvl.TextSize = 11.000
+
+		UICorner_2.Parent = Lvl
+
+		TXT.Name = "TXT"
+		TXT.Parent = ExampleItem
+		TXT.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		TXT.BackgroundTransparency = 0.700
+		TXT.BorderSizePixel = 0
+		TXT.Position = UDim2.new(0, 0, 0.810000002, 0)
+		TXT.Size = UDim2.new(1, 0, 0.189999998, 0)
+		TXT.Font = Enum.Font.Arial
+		TXT.TextColor3 = Color3.fromRGB(61, 61, 61)
+		TXT.TextSize = 11.000
+		TXT.Text = Name
+
+		UICorner_3.Parent = TXT
+
+		Upgr.Name = "Upgr"
+		Upgr.Parent = ExampleItem
+		Upgr.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Upgr.BackgroundTransparency = 0.700
+		Upgr.BorderSizePixel = 0
+		Upgr.Position = UDim2.new(0.610000014, 0, 0, 0)
+		Upgr.Size = UDim2.new(0.389999986, 0, 0.189999998, 0)
+		Upgr.Font = Enum.Font.Arial
+		Upgr.Text = Upgrade or "0"
+		Upgr.TextColor3 = Color3.fromRGB(61, 61, 61)
+		Upgr.TextSize = 11.000
+
+		UICorner_4.Parent = Upgr
+		return ExampleItem;
+	end
+ return ThingsAdd,ItemsMenu;
+end
+return ListOfThings;
+
