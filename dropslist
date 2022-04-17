@@ -43,6 +43,7 @@ List.Position = UDim2.new(0, 0, 1, 0)
 List.Size = UDim2.new(0, 595, 0, 277)
 List.CanvasSize = UDim2.new(0, 0, 0, 0)
 List.ClipsDescendants = true
+List.AutomaticCanvasSize = Enum.AutomaticSize.Y
 
 UIListLayout.Parent = List
 UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
