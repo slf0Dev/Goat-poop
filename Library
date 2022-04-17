@@ -441,8 +441,8 @@ function Library:Window(Title,keycode)
 			if not IsScrolled then
 				IsScrolled = true
 				TweenObjects(ScrollFolderButton,180,0.3)
-				Components:TweenSize(UDim2.new(0,242,0,FolderSize),"In","Sine",0.3,true,nil)
-				Folder1:TweenSize(UDim2.new(0,242,0,FolderSize + 40),"In","Sine",0.3,true,nil)
+				Components:TweenSize(UDim2.new(0,242,0,FolderSize - 35),"In","Sine",0.3,true,nil)
+				Folder1:TweenSize(UDim2.new(0,242,0,FolderSize +5),"In","Sine",0.3,true,nil)
 			else
 				IsScrolled = false
 				TweenObjects(ScrollFolderButton,0,0.3)
