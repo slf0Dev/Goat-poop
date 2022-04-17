@@ -1,0 +1,186 @@
+local DropList = Instance.new("ScreenGui")
+local Topbar = Instance.new("Frame")
+local List = Instance.new("ScrollingFrame")
+local UIListLayout = Instance.new("UIListLayout")
+local NameLabel = Instance.new("TextLabel")
+local UIGradient = Instance.new("UIGradient")
+local VelLabel = Instance.new("TextLabel")
+local UIGradient_2 = Instance.new("UIGradient")
+local XPLabel = Instance.new("TextLabel")
+local UIGradient_3 = Instance.new("UIGradient")
+local line = Instance.new("Frame")
+local UIGradient_4 = Instance.new("UIGradient")
+local LVLLabel = Instance.new("TextLabel")
+local UIGradient_5 = Instance.new("UIGradient")
+local ImageButton = Instance.new("ImageButton")
+
+--Properties:
+
+DropList.Name = "DropList"
+DropList.Parent = game.CoreGui
+DropList.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Topbar.Name = "Topbar"
+Topbar.Parent = DropList
+Topbar.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+Topbar.BorderSizePixel = 0
+Topbar.Position = UDim2.new(0.231043711, 0, 0.263565898, 0)
+Topbar.Size = UDim2.new(0, 595, 0, 61)
+Topbar.Active = true
+Topbar.Draggable = true
+
+List.Name = "List"
+List.Parent = Topbar
+List.Active = true
+List.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+List.BorderSizePixel = 0
+List.Position = UDim2.new(0, 0, 1, 0)
+List.Size = UDim2.new(0, 595, 0, 277)
+List.CanvasSize = UDim2.new(0, 0, 0, 0)
+List.ClipsDescendants = true
+
+UIListLayout.Parent = List
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+NameLabel.Name = "NameLabel"
+NameLabel.Parent = Topbar
+NameLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+NameLabel.BackgroundTransparency = 1.000
+NameLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
+NameLabel.BorderSizePixel = 0
+NameLabel.Position = UDim2.new(0.0302521009, 0, 0, 0)
+NameLabel.Size = UDim2.new(0, 225, 0, 30)
+NameLabel.Font = Enum.Font.Gotham
+NameLabel.Text = "Drops"
+NameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+NameLabel.TextSize = 14.000
+NameLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 229, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
+UIGradient.Parent = NameLabel
+
+VelLabel.Name = "VelLabel"
+VelLabel.Parent = Topbar
+VelLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+VelLabel.BackgroundTransparency = 1.000
+VelLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
+VelLabel.BorderSizePixel = 0
+VelLabel.Position = UDim2.new(0.0184873957, 0, 0.491803288, 0)
+VelLabel.Size = UDim2.new(0, 148, 0, 31)
+VelLabel.Font = Enum.Font.Gotham
+VelLabel.Text = "Vel's Earned: "
+VelLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+VelLabel.TextSize = 14.000
+VelLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 229, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
+UIGradient_2.Parent = VelLabel
+
+XPLabel.Name = "XPLabel"
+XPLabel.Parent = Topbar
+XPLabel.AnchorPoint = Vector2.new(0.5, 0)
+XPLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+XPLabel.BackgroundTransparency = 1.000
+XPLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
+XPLabel.BorderSizePixel = 0
+XPLabel.Position = UDim2.new(0.5, 0, 0.492000014, 0)
+XPLabel.Size = UDim2.new(0, 159, 0, 31)
+XPLabel.Font = Enum.Font.Gotham
+XPLabel.Text = "Exp Earned: "
+XPLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+XPLabel.TextSize = 14.000
+XPLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 229, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
+UIGradient_3.Parent = XPLabel
+
+line.Name = "line"
+line.Parent = Topbar
+line.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+line.BorderSizePixel = 0
+line.Position = UDim2.new(0, 0, 0.492000014, 0)
+line.Size = UDim2.new(1, 0, 0, 1)
+
+UIGradient_4.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 229, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
+UIGradient_4.Parent = line
+
+LVLLabel.Name = "LVLLabel"
+LVLLabel.Parent = Topbar
+LVLLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+LVLLabel.BackgroundTransparency = 1.000
+LVLLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
+LVLLabel.BorderSizePixel = 0
+LVLLabel.Position = UDim2.new(0.732773125, 0, 0.508196712, 0)
+LVLLabel.Size = UDim2.new(0, 159, 0, 31)
+LVLLabel.Font = Enum.Font.Gotham
+LVLLabel.Text = "Level's Earned: "
+LVLLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+LVLLabel.TextSize = 14.000
+LVLLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+UIGradient_5.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 229, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
+UIGradient_5.Parent = LVLLabel
+
+ImageButton.Parent = Topbar
+ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageButton.BackgroundTransparency = 1.000
+ImageButton.BorderSizePixel = 0
+ImageButton.Position = UDim2.new(0.939495802, 0, 0, 0)
+ImageButton.Size = UDim2.new(0, 36, 0, 30)
+ImageButton.Image = "rbxassetid://3926307971"
+ImageButton.ImageColor3 = Color3.fromRGB(144, 144, 144)
+ImageButton.ImageRectOffset = Vector2.new(324, 524)
+ImageButton.ImageRectSize = Vector2.new(36, 36)
+ImageButton.Rotation = 180
+local IsOpened = true
+
+ImageButton.MouseButton1Click:Connect(function()
+	if IsOpened then
+		IsOpened = false
+		TweenService:Create(ImageButton,TweenInfo.new(.3),{Rotation = 0}):Play()
+		List:TweenSize(UDim2.new(1,0,0,0),"Out","Sine",0.3)	
+	else
+		IsOpened = true
+		TweenService:Create(ImageButton,TweenInfo.new(.3),{Rotation = 180}):Play()
+		List:TweenSize(UDim2.new(1,0,0,277),"In","Sine",0.3)
+	end
+end)
+
+local StartVel = profile.Stats.Vel.Value
+local StartExp = profile.Stats.Exp.Value
+local StartLevel = plr.PlayerGui.CardinalUI.PlayerUI.HUD.LevelBar.Level.Text
+spawn(function()
+while wait(0.1) do
+	VelLabel.Text = "Vel's Earned: ".. profile.Stats.Vel.Value - StartVel
+	XPLabel.Text = "Exp Earned: ".. profile.Stats.Exp.Value - StartExp
+	LVLLabel.Text = "Level's Earned: " .. plr.PlayerGui.CardinalUI.PlayerUI.HUD.LevelBar.Level.Text:gsub("Level","") - StartLevel:gsub("Level","")
+end
+end)
+inventory.ChildAdded:Connect(function(obj)
+	
+
+local ItemLabel = Instance.new("TextLabel")
+local UIGradient = Instance.new("UIGradient")
+
+
+ItemLabel.Name = "ItemLabel"
+ItemLabel.Parent = List
+ItemLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ItemLabel.BackgroundTransparency = 1.000
+ItemLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
+ItemLabel.BorderSizePixel = 0
+ItemLabel.Position = UDim2.new(0.0302521009, 0, 0, 0)
+ItemLabel.Size = UDim2.new(0, 225, 0, 30)
+ItemLabel.Font = Enum.Font.Gotham
+ItemLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+ItemLabel.TextSize = 14.000
+
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 229, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
+UIGradient.Parent = ItemLabel
+for i,v in next,Database.Items:GetChildren() do
+	if v:FindFirstChild("Type") and v.Type.Value and v.Type.Value ~= "Material" and v.Type.Value ~= "Accessory" and v and obj and obj.Name == v.Name then
+		ItemLabel.Text = "[".. os.date() .."] " .. tostring(obj.Name) .. " [Level : " .. v.Level.Value .. "] " .. " [Rarity : "..v.Rarity.Value.."]"
+	end
+end
+end)
