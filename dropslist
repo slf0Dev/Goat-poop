@@ -1,3 +1,8 @@
+local plr = game.Players.localPlayer
+local profile = game:GetService("ReplicatedStorage").Profiles[plr.Name]
+local Database = game:GetService("ReplicatedStorage"):FindFirstChild("Database")
+local inventory = profile:FindFirstChild("Inventory")
+
 local DropList = Instance.new("ScreenGui")
 local Topbar = Instance.new("Frame")
 local List = Instance.new("ScrollingFrame")
