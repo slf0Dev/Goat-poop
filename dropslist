@@ -186,7 +186,7 @@ ItemLabel.TextSize = 14.000
 UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 229, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
 UIGradient.Parent = ItemLabel
 
-	for i,v in next,Database.Items:GetChildren() doq
+	for i,v in next,Database.Items:GetChildren() do
 		if v:FindFirstChild("Type") and v.Type.Value and v.Type.Value ~= "Material" and v and obj and obj.Name == v.Name then
 			for z,n in next,Drops do
 				ItemLabel.Text = "[".. os.date('[%I:%M:%S]') .."] " .. tostring(obj.Name) .. " [Level : " .. (v.Level.Value or "No level") .. "] " .. " [Rarity : "..v.Rarity.Value.."]"
