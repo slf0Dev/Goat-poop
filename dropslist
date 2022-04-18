@@ -190,7 +190,7 @@ UIGradient.Parent = ItemLabel
 	for i,v in next,Database.Items:GetChildren() do
 		if v:FindFirstChild("Type") and v.Type.Value and v.Type.Value ~= "Material" and v and obj and obj.Name == v.Name then
 			for z,n in next,Drops do
-				if v.Type.Value == "Accesory" then
+				if not v.Type.Value == "Accesory" then
 					ItemLabel.Text = "[".. os.date('[%I:%M:%S]') .."] " .. tostring(obj.Name) .. " [Level : " .. (v.Level.Value) .. "] " .. " [Rarity : "..v.Rarity.Value.."]"
 				else
 					ItemLabel.Text = "[".. os.date('[%I:%M:%S]') .."] " .. tostring(obj.Name) .. " [Level : " .. ("No level") .. "] " .. " [Rarity : "..v.Rarity.Value.."]"
