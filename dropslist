@@ -163,6 +163,7 @@ while wait(0.1) do
 	LVLLabel.Text = "Level's Earned: " .. plr.PlayerGui.CardinalUI.PlayerUI.HUD.LevelBar.Level.Text:gsub("Level","") - StartLevel:gsub("Level","")
 end
 end)
+local Drops = {}
 inventory.ChildAdded:Connect(function(obj)
 	
 
@@ -184,9 +185,13 @@ ItemLabel.TextSize = 14.000
 
 UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 229, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
 UIGradient.Parent = ItemLabel
-for i,v in next,Database.Items:GetChildren() do
-	if v:FindFirstChild("Type") and v.Type.Value and v.Type.Value ~= "Material" and v.Type.Value ~= "Accessory" and v and obj and obj.Name == v.Name then
-		ItemLabel.Text = "[".. os.date() .."] " .. tostring(obj.Name) .. " [Level : " .. v.Level.Value .. "] " .. " [Rarity : "..v.Rarity.Value.."]"
+
+	for i,v in next,Database.Items:GetChildren() doq
+		if v:FindFirstChild("Type") and v.Type.Value and v.Type.Value ~= "Material" and v and obj and obj.Name == v.Name then
+			for z,n in next,Drops do
+				ItemLabel.Text = "[".. os.date() .."] " .. tostring(obj.Name) .. " [Level : " .. (v.Level.Value or "No level") .. "] " .. " [Rarity : "..v.Rarity.Value.."]"
+			end
+		end
 	end
-end
+
 end)
