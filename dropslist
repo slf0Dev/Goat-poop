@@ -2,6 +2,7 @@ local plr = game.Players.localPlayer
 local profile = game:GetService("ReplicatedStorage").Profiles[plr.Name]
 local Database = game:GetService("ReplicatedStorage"):FindFirstChild("Database")
 local inventory = profile:FindFirstChild("Inventory")
+local TweenService = game:GetService("TweenService")
 
 local DropList = Instance.new("ScreenGui")
 local Topbar = Instance.new("Frame")
