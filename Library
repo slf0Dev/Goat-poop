@@ -41,8 +41,8 @@ local Windows = 0
 
 local Library = {}
 
-LibraryOptions = {
-	["Scale"] = 0.9
+_G.LibraryOptions = {
+	["Scale"] = 0.85
 }
 
 pcall(function()
@@ -320,9 +320,9 @@ function Library:Window(Title,keycode)
 
 
 	local UIScale = Instance.new("UIScale",lib)
-	UIScale.Scale = LibraryOptions["Scale"]
+	UIScale.Scale = _G.LibraryOptions["Scale"]
 
-	local SavedScale = LibraryOptions["Scale"] or 1
+	local SavedScale = _G.LibraryOptions["Scale"] or 1
 	local dragging
 	local dragInput
 	local dragStart
