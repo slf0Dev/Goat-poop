@@ -14,7 +14,7 @@ local TweenService = game:GetService("TweenService")
 local RaritiesColors = {
 ["Legendary"] = Color3.fromRGB(255,25,150),
 ["Rare"] = Color3.fromRGB(0,100,255),
-["Unommon"] = Color3.fromRGB(0,255,100),
+["Uncommon"] = Color3.fromRGB(0,255,100),
 ["Common"] = Color3.fromRGB(150,150,150)
 }
 
