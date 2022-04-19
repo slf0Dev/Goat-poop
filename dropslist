@@ -192,7 +192,6 @@ UIGradient.Parent = ItemLabel
 		if v:FindFirstChild("Type") and v.Type.Value and v.Type.Value ~= "Material" and v.Type.Value ~= "Accessory" and v and obj and obj.Name == v.Name then
 			for z,n in next,Drops do
 					ItemLabel.Text = "[".. (RealTime[1]..":"..RealTime[2]..":"..RealTime[3]) .."] " .. tostring(obj.Name) .. " [Level : " .. (v.Level.Value) .. "] " .. " [Rarity : "..v.Rarity.Value.."]"
-					ItemLabel.Text = "[".. (RealTime[1]..":"..RealTime[2]..":"..RealTime[3]) .."] " .. tostring(obj.Name) .. " [Level : " .. ("No level") .. "] " .. " [Rarity : "..v.Rarity.Value.."]"
 			end
 		end
 	end
