@@ -188,12 +188,13 @@ UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.from
 UIGradient.Parent = ItemLabel
 
 	for i,v in next,Database.Items:GetChildren() do
+	local RealTime = {os.date("*t",os.time())["hour"],  os.date("*t",os.time())["min"], os.date("*t",os.time())["sec"]}
 		if v:FindFirstChild("Type") and v.Type.Value and v.Type.Value ~= "Material" and v and obj and obj.Name == v.Name then
 			for z,n in next,Drops do
 				if not v.Type.Value == "Accessory" then
-					ItemLabel.Text = "[".. os.date('[%I:%M:%S]') .."] " .. tostring(obj.Name) .. " [Level : " .. (v.Level.Value) .. "] " .. " [Rarity : "..v.Rarity.Value.."]"
+					ItemLabel.Text = "[".. (RealTime[1]..":"..RealTime[2]..":"..RealTime[3]) .."] " .. tostring(obj.Name) .. " [Level : " .. (v.Level.Value) .. "] " .. " [Rarity : "..v.Rarity.Value.."]"
 				else
-					ItemLabel.Text = "[".. os.date('[%I:%M:%S]') .."] " .. tostring(obj.Name) .. " [Level : " .. ("No level") .. "] " .. " [Rarity : "..v.Rarity.Value.."]"
+					ItemLabel.Text = "[".. (RealTime[1]..":"..RealTime[2]..":"..RealTime[3]) .."] " .. tostring(obj.Name) .. " [Level : " .. ("No level") .. "] " .. " [Rarity : "..v.Rarity.Value.."]"
 				end
 			end
 		end
