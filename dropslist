@@ -1,8 +1,22 @@
+for i,v in next,game.CoreGui:GetChildren() do
+	if v.Name == "DropList" then
+	v:Destroy()
+	end
+end
+
 local plr = game.Players.localPlayer
 local profile = game:GetService("ReplicatedStorage").Profiles[plr.Name]
 local Database = game:GetService("ReplicatedStorage"):FindFirstChild("Database")
 local inventory = profile:FindFirstChild("Inventory")
 local TweenService = game:GetService("TweenService")
+
+
+local RaritiesColors = {
+["Legendary"] = Color3.fromRGB(255,25,150),
+["Rare"] = Color3.fromRGB(0,100,255),
+["Unommon"] = Color3.fromRGB(0,255,100),
+["Common"] = Color3.fromRGB(150,150,150)
+}
 
 local DropList = Instance.new("ScreenGui")
 local Topbar = Instance.new("Frame")
@@ -64,7 +78,7 @@ NameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 NameLabel.TextSize = 14.000
 NameLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 229, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(135,135,135)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(150,150,150))}
 UIGradient.Parent = NameLabel
 
 VelLabel.Name = "VelLabel"
@@ -81,7 +95,7 @@ VelLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 VelLabel.TextSize = 14.000
 VelLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 229, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
+UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(135,135,135)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(150,150,150))}
 UIGradient_2.Parent = VelLabel
 
 XPLabel.Name = "XPLabel"
@@ -99,7 +113,7 @@ XPLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 XPLabel.TextSize = 14.000
 XPLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 229, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
+UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(135,135,135)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(150,150,150))}
 UIGradient_3.Parent = XPLabel
 
 line.Name = "line"
@@ -109,7 +123,7 @@ line.BorderSizePixel = 0
 line.Position = UDim2.new(0, 0, 0.492000014, 0)
 line.Size = UDim2.new(1, 0, 0, 1)
 
-UIGradient_4.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 229, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
+UIGradient_4.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(135,135,135)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(150,150,150))}
 UIGradient_4.Parent = line
 
 LVLLabel.Name = "LVLLabel"
@@ -126,7 +140,7 @@ LVLLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 LVLLabel.TextSize = 14.000
 LVLLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-UIGradient_5.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 229, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
+UIGradient_5.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(135,135,135)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(150,150,150))}
 UIGradient_5.Parent = LVLLabel
 
 ImageButton.Parent = Topbar
@@ -166,34 +180,37 @@ end
 end)
 local Drops = {}
 inventory.ChildAdded:Connect(function(obj)
-	
+    for i,v in next,Database.Items:GetChildren() do
+        local RealTime = {os.date("*t",os.time())["hour"],  os.date("*t",os.time())["min"], os.date("*t",os.time())["sec"]}
+            if v:FindFirstChild("Type") and v.Type.Value and v.Type.Value ~= "Material" and v.Type.Value ~= "Accessory" and v and obj and obj.Name == v.Name then
+                    if Drops[obj.Name] then
+                        Drops[obj.Name] += 1
+                            for _,label in pairs(List:GetChildren()) do
+                                if label.Name == obj.Name then
+                                label.Text = ("[".. os.date() .."] " .. tostring(obj.Name) .. " [x".. tonumber(Drops[obj.Name]) .. "] [Level : " .. (v.Level.Value) .. "] " .. " [Rarity : "..v.Rarity.Value.."]")
+                                end
+                            end
+                    else
+                        local ItemLabel = Instance.new("TextLabel")
 
-local ItemLabel = Instance.new("TextLabel")
-local UIGradient = Instance.new("UIGradient")
+                        ItemLabel.Name = obj.Name
+                        ItemLabel.Parent = List
+                        ItemLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                        ItemLabel.BackgroundTransparency = 1
+                        ItemLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
+                        ItemLabel.BorderSizePixel = 0
+                        ItemLabel.Position = UDim2.new(0.0302521009, 0, 0, 0)
+                        ItemLabel.Size = UDim2.new(0, 225, 0, 30)
+                        ItemLabel.Font = Enum.Font.Gotham
+                        ItemLabel.TextSize = 14.000
+
+                        ItemLabel.TextColor3 = RaritiesColors[v.Rarity.Value]
+
+                        Drops[obj.Name] = 1
+                        ItemLabel.Text = ("[".. os.date() .."] " .. tostring(obj.Name) .. " [x1" .. "] [Level : " .. (v.Level.Value) .. "] " .. " [Rarity : "..v.Rarity.Value.."]")
 
 
-ItemLabel.Name = "ItemLabel"
-ItemLabel.Parent = List
-ItemLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ItemLabel.BackgroundTransparency = 1.000
-ItemLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
-ItemLabel.BorderSizePixel = 0
-ItemLabel.Position = UDim2.new(0.0302521009, 0, 0, 0)
-ItemLabel.Size = UDim2.new(0, 225, 0, 30)
-ItemLabel.Font = Enum.Font.Gotham
-ItemLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-ItemLabel.TextSize = 14.000
-
-UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 229, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
-UIGradient.Parent = ItemLabel
-
-	for i,v in next,Database.Items:GetChildren() do
-	local RealTime = {os.date("*t",os.time())["hour"],  os.date("*t",os.time())["min"], os.date("*t",os.time())["sec"]}
-		if v:FindFirstChild("Type") and v.Type.Value and v.Type.Value ~= "Material" and v.Type.Value ~= "Accessory" and v and obj and obj.Name == v.Name then
-			for z,n in next,Drops do
-					ItemLabel.Text = "[".. (RealTime[1]..":"..RealTime[2]..":"..RealTime[3]) .."] " .. tostring(obj.Name) .. " [Level : " .. (v.Level.Value) .. "] " .. " [Rarity : "..v.Rarity.Value.."]"
-			end
-		end
-	end
-
+                    end
+            end
+        end
 end)
