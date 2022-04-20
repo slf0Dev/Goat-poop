@@ -633,7 +633,7 @@ function Library:Window(Title,keycode)
 					move(Pressed)
 				end
 			end)
-
+			return Slider;
 		end
 
 		function InsideFolder:Button(Text,callback)
