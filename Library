@@ -900,7 +900,10 @@ function InsideFolder:dropdown(placeholder)
 	end)
 
 	local InsideDropdown = {}
-
+	
+	FolderSize += 45.5
+	FoldersSize += 45.5
+			
 	function InsideDropdown:Choice(choicetext,callback)
 
 		local Choice = Instance.new("TextButton")
