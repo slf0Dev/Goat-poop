@@ -902,8 +902,8 @@ function InsideFolder:Dropdown(placeholder)
 
 	local InsideDropdown = {}
 	
-	FolderSize += 100.5
-	FoldersSize += 100.5
+	FolderSize += 115.5
+	FoldersSize += 115.5
 			
 	function InsideDropdown:Choice(choicetext,callback)
 
