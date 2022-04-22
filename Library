@@ -837,6 +837,7 @@ function InsideFolder:Dropdown(placeholder)
 	Choices.ScrollBarThickness = 6
 	Choices.ClipsDescendants = true
 	Choices.AutomaticCanvasSize = Enum.AutomaticSize.Y
+	Choices.ZIndex = 9
 
 	UIListLayout.Parent = Choices
 	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
