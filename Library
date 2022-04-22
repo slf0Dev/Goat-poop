@@ -791,7 +791,7 @@ function Library:Window(Title,keycode)
 			return TextButton;
 		end
 
-function InsideFolder:dropdown(placeholder)
+function InsideFolder:Dropdown(placeholder)
 	local ScreenGui = Instance.new("ScreenGui")
 	local Dropdown = Instance.new("Frame")
 	local FindBox = Instance.new("TextBox")
@@ -805,7 +805,7 @@ function InsideFolder:dropdown(placeholder)
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 	Dropdown.Name = "Dropdown"
-	Dropdown.Parent = ScreenGui
+	Dropdown.Parent = Components
 	Dropdown.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
 	Dropdown.BorderSizePixel = 0
 	Dropdown.Position = UDim2.new(0.214986622, 0, 0.12713179, 0)
