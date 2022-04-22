@@ -790,6 +790,152 @@ function Library:Window(Title,keycode)
 			end)
 			return TextButton;
 		end
+
+function InsideFolder:dropdown(placeholder)
+	local ScreenGui = Instance.new("ScreenGui")
+	local Dropdown = Instance.new("Frame")
+	local FindBox = Instance.new("TextBox")
+	local Choices = Instance.new("ScrollingFrame")
+	local UIListLayout = Instance.new("UIListLayout")
+	local skip = Instance.new("Frame")
+	local DropdownToggle = Instance.new("ImageButton")
+
+
+	ScreenGui.Parent = game.CoreGui
+	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	Dropdown.Name = "Dropdown"
+	Dropdown.Parent = ScreenGui
+	Dropdown.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
+	Dropdown.BorderSizePixel = 0
+	Dropdown.Position = UDim2.new(0.214986622, 0, 0.12713179, 0)
+	Dropdown.Size = UDim2.new(0, 235, 0, 40)
+
+	FindBox.Name = "FindBox"
+	FindBox.Parent = Dropdown
+	FindBox.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
+	FindBox.BackgroundTransparency = 1.000
+	FindBox.BorderSizePixel = 0
+	FindBox.Position = UDim2.new(0.046808511, 0, 0, 0)
+	FindBox.Size = UDim2.new(0.774468064, 0, 1, 0)
+	FindBox.Font = Enum.Font.SourceSansBold
+	FindBox.PlaceholderColor3 = Color3.fromRGB(125, 125, 125)
+	FindBox.PlaceholderText = placeholder
+	FindBox.Text = ""
+	FindBox.TextColor3 = Color3.fromRGB(189, 189, 189)
+	FindBox.TextSize = 19.000
+	FindBox.TextXAlignment = Enum.TextXAlignment.Left
+
+	Choices.Name = "Choices"
+	Choices.Parent = Dropdown
+	Choices.Active = true
+	Choices.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+	Choices.BorderSizePixel = 0
+	Choices.Position = UDim2.new(0, 0, 1, 0)
+	Choices.Size = UDim2.new(0, 235, 0, 0)
+	Choices.CanvasSize = UDim2.new(0, 0, 0, 0)
+	Choices.ScrollBarThickness = 6
+	Choices.ClipsDescendants = true
+	Choices.AutomaticCanvasSize = Enum.AutomaticSize.Y
+
+	UIListLayout.Parent = Choices
+	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout.Padding = UDim.new(0, 3)
+
+	skip.Name = "skip"
+	skip.Parent = Choices
+	skip.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	skip.BackgroundTransparency = 1.000
+	skip.BorderSizePixel = 0
+
+	DropdownToggle.Name = "DropdownToggle"
+	DropdownToggle.Parent = Dropdown
+	DropdownToggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	DropdownToggle.BackgroundTransparency = 1.000
+	DropdownToggle.BorderSizePixel = 0
+	DropdownToggle.Position = UDim2.new(0.829787254, 0, -1.90734866e-07, 0)
+	DropdownToggle.Rotation = 180.000
+	DropdownToggle.Size = UDim2.new(0, 40, 0, 40)
+	DropdownToggle.AutoButtonColor = false
+	DropdownToggle.Image = "rbxassetid://3926307971"
+	DropdownToggle.ImageColor3 = Color3.fromRGB(107, 107, 107)
+	DropdownToggle.ImageRectOffset = Vector2.new(324, 524)
+	DropdownToggle.ImageRectSize = Vector2.new(36, 36)
+	local IsOpened = false
+	DropdownToggle.MouseButton1Click:Connect(function()
+		if IsOpened then
+			IsOpened = false
+			Choices:TweenSize(UDim2.new(1,0,0,0),"Out","Quad",0.2)
+		else
+			IsOpened = true
+			Choices:TweenSize(UDim2.new(1,0,0,100),"Out","Quad",0.2)
+		end
+	end)
+
+	FindBox.FocusLost:Connect(function()
+		if FindBox.Text ~= "" then
+			for i,v in pairs(Choices:GetChildren()) do
+				if v.Name ~= "UIListLayout" then
+					if v.Name:find(FindBox.Text:lower()) then
+						v.Visible = true
+					else
+						v.Visible = false
+					end
+				end
+			end
+		end
+	end)
+
+	FindBox.Focused:Connect(function()
+		for i,v in pairs(Choices:GetChildren()) do
+			if v.Name ~= "UIListLayout" then
+				v.Visible = true
+			end
+		end
+		if not IsOpened then
+			IsOpened = true
+			Choices:TweenSize(UDim2.new(1,0,0,100),"Out","Quad",0.2)
+		end
+	end)
+
+	local InsideDropdown = {}
+
+	function InsideDropdown:Choice(choicetext,callback)
+
+		local Choice = Instance.new("TextButton")
+		local UICorner = Instance.new("UICorner")
+
+
+		Choice.Name = choicetext
+		Choice.Parent = Choices
+		Choice.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
+		Choice.BackgroundTransparency = 1
+		Choice.BorderSizePixel = 0
+		Choice.Size = UDim2.new(0, 230, 0, 35)
+		Choice.AutoButtonColor = false
+		Choice.Font = Enum.Font.SourceSansBold
+		Choice.TextColor3 = Color3.fromRGB(189, 189, 189)
+		Choice.TextSize = 19.000
+		Choice.Text = choicetext
+		UICorner.Parent = Choice
+
+		Choice.MouseButton1Click:Connect(function()
+			spawn(function() callback() end)
+			FindBox.Text = choicetext
+		end)
+
+		Choice.MouseEnter:Connect(function()
+			game:GetService("TweenService"):Create(Choice,TweenInfo.new(.3),{BackgroundTransparency = 0.3}):Play()
+		end)
+		
+		Choice.MouseLeave:Connect(function()
+			game:GetService("TweenService"):Create(Choice,TweenInfo.new(.3),{BackgroundTransparency = 1}):Play()
+		end)
+		return Choice;
+	end
+		return InsideDropdown;
+		end
 		return InsideFolder;
 	end
 
