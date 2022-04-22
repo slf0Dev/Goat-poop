@@ -806,7 +806,7 @@ function InsideFolder:Dropdown(placeholder)
 
 	Dropdown.Name = "Dropdown"
 	Dropdown.Parent = Components
-	Dropdown.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
+	Dropdown.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 	Dropdown.BorderSizePixel = 0
 	Dropdown.Position = UDim2.new(0.214986622, 0, 0.12713179, 0)
 	Dropdown.Size = UDim2.new(0, 235, 0, 40)
@@ -831,13 +831,14 @@ function InsideFolder:Dropdown(placeholder)
 	Choices.Active = true
 	Choices.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 	Choices.BorderSizePixel = 0
-	Choices.Position = UDim2.new(0, 0, 1, 0)
+	Choices.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Choices.Size = UDim2.new(0, 235, 0, 0)
 	Choices.CanvasSize = UDim2.new(0, 0, 0, 0)
-	Choices.ScrollBarThickness = 6
+	Choices.ScrollBarThickness = 3
 	Choices.ClipsDescendants = true
 	Choices.AutomaticCanvasSize = Enum.AutomaticSize.Y
 	Choices.ZIndex = 9
+	Choices.AnchorPoint = Vector2.new(0.5,0.5)
 
 	UIListLayout.Parent = Choices
 	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
@@ -863,14 +864,14 @@ function InsideFolder:Dropdown(placeholder)
 	DropdownToggle.ImageColor3 = Color3.fromRGB(107, 107, 107)
 	DropdownToggle.ImageRectOffset = Vector2.new(324, 524)
 	DropdownToggle.ImageRectSize = Vector2.new(36, 36)
-	local IsOpened = false
+	local IsDropOpened = false
 	DropdownToggle.MouseButton1Click:Connect(function()
-		if IsOpened then
-			IsOpened = false
+		if IsDropOpened then
+			IsDropOpened = false
 			Choices:TweenSize(UDim2.new(1,0,0,0),"Out","Quad",0.2)
 		else
-			IsOpened = true
-			Choices:TweenSize(UDim2.new(1,0,0,100),"Out","Quad",0.2)
+			IsDropOpened = true
+			Choices:TweenSize(UDim2.new(1,0,0,40),"Out","Quad",0.2)
 		end
 	end)
 
@@ -894,16 +895,16 @@ function InsideFolder:Dropdown(placeholder)
 				v.Visible = true
 			end
 		end
-		if not IsOpened then
-			IsOpened = true
-			Choices:TweenSize(UDim2.new(1,0,0,100),"Out","Quad",0.2)
+		if not IsDropOpened then
+			IsDropOpened = true
+			Choices:TweenSize(UDim2.new(1,0,0,40),"Out","Quad",0.2)
 		end
 	end)
 
 	local InsideDropdown = {}
 	
-	FolderSize += 115.5
-	FoldersSize += 115.5
+	FolderSize += 45.5
+	FoldersSize += 45.5
 			
 	function InsideDropdown:Choice(choicetext,callback)
 
@@ -916,7 +917,7 @@ function InsideFolder:Dropdown(placeholder)
 		Choice.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
 		Choice.BackgroundTransparency = 1
 		Choice.BorderSizePixel = 0
-		Choice.Size = UDim2.new(0, 230, 0, 35)
+		Choice.Size = UDim2.new(0, 232, 0, 35)
 		Choice.AutoButtonColor = false
 		Choice.Font = Enum.Font.SourceSansBold
 		Choice.TextColor3 = Color3.fromRGB(189, 189, 189)
@@ -927,6 +928,8 @@ function InsideFolder:Dropdown(placeholder)
 		Choice.MouseButton1Click:Connect(function()
 			spawn(function() callback() end)
 			FindBox.Text = choicetext
+			IsDropOpened = false
+			Choices:TweenSize(UDim2.new(1,0,0,0),"Out","Quad",0.2)
 		end)
 
 		Choice.MouseEnter:Connect(function()
