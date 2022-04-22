@@ -792,17 +792,11 @@ function Library:Window(Title,keycode)
 		end
 
 function InsideFolder:Dropdown(placeholder)
-	local ScreenGui = Instance.new("ScreenGui")
 	local Dropdown = Instance.new("Frame")
 	local FindBox = Instance.new("TextBox")
 	local Choices = Instance.new("ScrollingFrame")
 	local UIListLayout = Instance.new("UIListLayout")
 	local skip = Instance.new("Frame")
-	local DropdownToggle = Instance.new("ImageButton")
-
-
-	ScreenGui.Parent = game.CoreGui
-	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 	Dropdown.Name = "Dropdown"
 	Dropdown.Parent = Components
@@ -827,18 +821,19 @@ function InsideFolder:Dropdown(placeholder)
 	FindBox.TextXAlignment = Enum.TextXAlignment.Left
 
 	Choices.Name = "Choices"
-	Choices.Parent = Dropdown
+	Choices.Parent = lib
 	Choices.Active = true
 	Choices.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 	Choices.BorderSizePixel = 0
-	Choices.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Choices.Position = UDim2.new(0.5,0,0.5,0)
 	Choices.Size = UDim2.new(0, 235, 0, 0)
 	Choices.CanvasSize = UDim2.new(0, 0, 0, 0)
 	Choices.ScrollBarThickness = 3
 	Choices.ClipsDescendants = true
 	Choices.AutomaticCanvasSize = Enum.AutomaticSize.Y
-	Choices.ZIndex = 9
+	Choices.ZIndex = 999
 	Choices.AnchorPoint = Vector2.new(0.5,0.5)
+
 
 	UIListLayout.Parent = Choices
 	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
@@ -851,43 +846,26 @@ function InsideFolder:Dropdown(placeholder)
 	skip.BackgroundTransparency = 1.000
 	skip.BorderSizePixel = 0
 
-	DropdownToggle.Name = "DropdownToggle"
-	DropdownToggle.Parent = Dropdown
-	DropdownToggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	DropdownToggle.BackgroundTransparency = 1.000
-	DropdownToggle.BorderSizePixel = 0
-	DropdownToggle.Position = UDim2.new(0.829787254, 0, -1.90734866e-07, 0)
-	DropdownToggle.Rotation = 180.000
-	DropdownToggle.Size = UDim2.new(0, 40, 0, 40)
-	DropdownToggle.AutoButtonColor = false
-	DropdownToggle.Image = "rbxassetid://3926307971"
-	DropdownToggle.ImageColor3 = Color3.fromRGB(107, 107, 107)
-	DropdownToggle.ImageRectOffset = Vector2.new(324, 524)
-	DropdownToggle.ImageRectSize = Vector2.new(36, 36)
-	local IsDropOpened = false
-	DropdownToggle.MouseButton1Click:Connect(function()
-		if IsDropOpened then
-			IsDropOpened = false
-			Choices:TweenSize(UDim2.new(1,0,0,0),"Out","Quad",0.2)
-		else
-			IsDropOpened = true
-			Choices:TweenSize(UDim2.new(1,0,0,40),"Out","Quad",0.2)
-		end
-	end)
+	
+
 
 	FindBox.FocusLost:Connect(function()
-		if FindBox.Text ~= "" then
-			for i,v in pairs(Choices:GetChildren()) do
-				if v.Name ~= "UIListLayout" then
-					if v.Name:find(FindBox.Text:lower()) then
-						v.Visible = true
-					else
-						v.Visible = false
-					end
-				end
-			end
-		end
+            Choices:TweenSize(UDim2.new(0,250,0,0),"Out","Quad",0.2,true,nil)
 	end)
+
+    FindBox.Changed:Connect(function(Property)
+        if Property == "Text" then
+            for i,v in pairs(Choices:GetChildren()) do
+                if v.Name ~= "UIListLayout" then
+                    if v.Name:find(FindBox.Text:lower()) then
+                        v.Visible = true
+                    else
+                        v.Visible = false
+                    end
+                end
+            end
+        end
+    end)
 
 	FindBox.Focused:Connect(function()
 		for i,v in pairs(Choices:GetChildren()) do
@@ -895,10 +873,7 @@ function InsideFolder:Dropdown(placeholder)
 				v.Visible = true
 			end
 		end
-		if not IsDropOpened then
-			IsDropOpened = true
-			Choices:TweenSize(UDim2.new(1,0,0,40),"Out","Quad",0.2)
-		end
+        Choices:TweenSize(UDim2.new(0,250,0,150),"Out","Quad",0.2,true,nil)
 	end)
 
 	local InsideDropdown = {}
@@ -911,8 +886,9 @@ function InsideFolder:Dropdown(placeholder)
 		local Choice = Instance.new("TextButton")
 		local UICorner = Instance.new("UICorner")
 
-
-		Choice.Name = choicetext
+        pcall(function()
+		Choice.Name = choicetext:lower()
+        end)
 		Choice.Parent = Choices
 		Choice.BackgroundColor3 = Color3.fromRGB(44, 44, 44)
 		Choice.BackgroundTransparency = 1
@@ -929,7 +905,7 @@ function InsideFolder:Dropdown(placeholder)
 			spawn(function() callback() end)
 			FindBox.Text = choicetext
 			IsDropOpened = false
-			Choices:TweenSize(UDim2.new(1,0,0,0),"Out","Quad",0.2)
+			Choices:TweenSize(UDim2.new(0,250,0,0),"Out","Quad",0.2)
 		end)
 
 		Choice.MouseEnter:Connect(function()
