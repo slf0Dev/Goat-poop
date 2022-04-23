@@ -938,6 +938,7 @@ function InsideFolder:Dropdown(placeholder)
 			LibraryBox.Text = ""
 			LibraryBox.TextColor3 = Color3.fromRGB(189,189,189)
 			LibraryBox.TextSize = 21.000
+			LibraryBox.PlaceholderText = placeholder
 		
 			UICorner.Parent = LibraryBox
 			
