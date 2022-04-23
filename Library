@@ -919,6 +919,39 @@ function InsideFolder:Dropdown(placeholder)
 	end
 		return InsideDropdown;
 		end
+		function InsideFolder:TextBox(placeholder,callback)
+
+	FolderSize += 45.5
+	FoldersSize += 45.5
+
+			local LibraryBox = Instance.new("TextBox")
+			local UICorner = Instance.new("UICorner")
+		
+		
+			LibraryBox.Name = "LibraryBox"
+			LibraryBox.Parent = Components
+			LibraryBox.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+			LibraryBox.BorderSizePixel = 0
+			LibraryBox.Position = UDim2.new(0.173951834, 0, 0.195348844, 0)
+			LibraryBox.Size = UDim2.new(0, 235, 0, 40)
+			LibraryBox.Font = Enum.Font.SourceSansBold
+			LibraryBox.Text = ""
+			LibraryBox.TextColor3 = Color3.fromRGB(189,189,189)
+			LibraryBox.TextSize = 21.000
+		
+			UICorner.Parent = LibraryBox
+			
+			LibraryBox.Focused:Connect(function()
+				TweenService:Create(LibraryBox,TweenInfo.new(.3),{BackgroundTransparency = 0.6}):Play()
+			end)
+			
+			LibraryBox.FocusLost:Connect(function()
+				TweenService:Create(LibraryBox,TweenInfo.new(.3),{BackgroundTransparency = 0}):Play()
+				if LibraryBox.Text ~= "" then
+					spawn(function() callback(LibraryBox.Text) end)
+				end
+			end)
+		end
 		return InsideFolder;
 	end
 
