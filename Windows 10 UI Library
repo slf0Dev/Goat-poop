@@ -909,12 +909,12 @@ function Library.Main(Text,keycode)
 				TextLabel.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
 				TextLabel.BackgroundTransparency = 1.000
 				TextLabel.BorderSizePixel = 0
-				TextLabel.Position = UDim2.new(-0.310344875, 0, -0.5, 0)
+				TextLabel.Position = UDim2.new(-0.350344875, 0, -0.5, 0)
 				TextLabel.Size = UDim2.new(0, 37, 0, 11)
 				TextLabel.Font = Enum.Font.SourceSansBold
 				TextLabel.Text = defaultValue
 				TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-				TextLabel.TextSize = 14.000
+				TextLabel.TextSize = 13.000
 
 
 				local Sliding,Dragging = false
