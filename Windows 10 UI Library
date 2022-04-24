@@ -813,21 +813,6 @@ function Library.Main(Text,keycode)
 						TweenService:Create(Toggle,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(200,200,200)}):Play()
 					end
 				end)
-				
-				if not statement then
-					Circle:TweenPosition(UDim2.new(0.08,0,0.5,0),"Out","Quad",0.3,true,nil)
-					TweenService:Create(Circle,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(255,255,255)}):Play()
-					TweenService:Create(Circle,TweenInfo.new(0.3),{BackgroundTransparency = 0.8}):Play()
-					TweenService:Create(OuterBorder,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(255,255,255)}):Play()
-					TweenService:Create(OuterBorder,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
-					TweenService:Create(Toggle,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(200,200,200)}):Play()
-				else
-					TweenService:Create(OuterBorder,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(37, 150, 255)}):Play()
-					TweenService:Create(OuterBorder,TweenInfo.new(0.3),{BackgroundTransparency = 0}):Play()
-					TweenService:Create(Circle,TweenInfo.new(0.3),{BackgroundTransparency = 0}):Play()
-					TweenService:Create(Toggle,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(255,255,255)}):Play()
-					Circle:TweenPosition(UDim2.new(0.64,0,0.5,0),"Out","Quad",0.3,true,nil)
-				end
 
 				ToggleCorner.Name = "ToggleCorner"
 				ToggleCorner.Parent = Toggle
@@ -869,6 +854,20 @@ function Library.Main(Text,keycode)
 				CircleCorner.CornerRadius = UDim.new(0, 5000)
 				CircleCorner.Name = "CircleCorner"
 				CircleCorner.Parent = Circle
+				if not statement then
+					Circle:TweenPosition(UDim2.new(0.08,0,0.5,0),"Out","Quad",0.3,true,nil)
+					TweenService:Create(Circle,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(255,255,255)}):Play()
+					TweenService:Create(Circle,TweenInfo.new(0.3),{BackgroundTransparency = 0.8}):Play()
+					TweenService:Create(OuterBorder,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(255,255,255)}):Play()
+					TweenService:Create(OuterBorder,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
+					TweenService:Create(Toggle,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(200,200,200)}):Play()
+				else
+					TweenService:Create(OuterBorder,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(37, 150, 255)}):Play()
+					TweenService:Create(OuterBorder,TweenInfo.new(0.3),{BackgroundTransparency = 0}):Play()
+					TweenService:Create(Circle,TweenInfo.new(0.3),{BackgroundTransparency = 0}):Play()
+					TweenService:Create(Toggle,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(255,255,255)}):Play()
+					Circle:TweenPosition(UDim2.new(0.64,0,0.5,0),"Out","Quad",0.3,true,nil)
+				end
 				return Toggle;
 			end
 			function InsideFolder.Slider(Text,min,max,callback,defaultValue,precise)
