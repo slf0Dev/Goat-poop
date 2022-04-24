@@ -1077,6 +1077,144 @@ function Library.Main(Text,keycode)
 				
 				return TextBox;
 			end
+						function InsideFolder.Dropdown(placeholder)
+				local Dropdown = Instance.new("TextBox")
+				local DropdownFrame = Instance.new("Frame")
+				local UICorner = Instance.new("UICorner")
+				local SearchIcon = Instance.new("ImageLabel")
+				local BoxStroke = Instance.new("UIStroke")
+				local UICorner_10 = Instance.new("UICorner")
+				local DropFrameStroke = Instance.new("UIStroke")
+				local DropDownListFrame = Instance.new("ScrollingFrame")
+				local UIListLayout = Instance.new("UIListLayout")
+
+
+				Dropdown.Parent = DropdownFrame
+				Dropdown.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+				Dropdown.BorderSizePixel = 0
+				Dropdown.AnchorPoint = Vector2.new(0.5,0)
+				Dropdown.Position = UDim2.new(0.5, 0, 0, 0)
+				Dropdown.Size = UDim2.new(0, 299, 0, 34)
+				Dropdown.Font = Enum.Font.SourceSansSemibold
+				Dropdown.PlaceholderText = placeholder
+				Dropdown.Text = ""
+				Dropdown.TextColor3 = Color3.fromRGB(200, 200, 200)
+				Dropdown.TextSize = 16.000
+
+				UICorner_10.Parent = DropdownFrame
+				UICorner_10.CornerRadius = UDim.new(0,8)
+
+				BoxStroke.Parent = DropdownFrame
+				BoxStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+				BoxStroke.Color = Color3.fromRGB(255,255,255)
+				BoxStroke.LineJoinMode = Enum.LineJoinMode.Round
+				BoxStroke.Thickness = 1
+				BoxStroke.Transparency = 0.95
+
+				SearchIcon.Name = "SearchIcon"
+				SearchIcon.Parent = Dropdown
+				SearchIcon.AnchorPoint = Vector2.new(0, 0.5)
+				SearchIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				SearchIcon.BackgroundTransparency = 1.000
+				SearchIcon.BorderSizePixel = 0
+				SearchIcon.Position = UDim2.new(0.889999986, 0, 0.5, 0)
+				SearchIcon.Size = UDim2.new(0, 20, 0, 20)
+				SearchIcon.Image = "rbxassetid://3926305904"
+				SearchIcon.ImageColor3 = Color3.fromRGB(165, 165, 165)
+				SearchIcon.ImageRectOffset = Vector2.new(4, 44)
+				SearchIcon.ImageRectSize = Vector2.new(36, 36)
+
+				DropDownListFrame.Name = "DropDownListFrame"
+				DropDownListFrame.Parent = Dropdown
+				DropDownListFrame.Active = true
+				DropDownListFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				DropDownListFrame.BackgroundTransparency = 1
+				DropDownListFrame.BorderSizePixel = 0
+				DropDownListFrame.Position = UDim2.new(0, 0, 1, 0)
+				DropDownListFrame.Size = UDim2.new(1, 0, 0, 0)
+				DropDownListFrame.CanvasSize = UDim2.new(0,0,0,0)
+				DropDownListFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+				DropDownListFrame.ScrollBarThickness = 6
+				DropDownListFrame.ScrollBarImageTransparency = 0.7
+
+
+				DropdownFrame.Name = "DropdownFrame"
+				DropdownFrame.Parent = FoldersComponents
+				DropdownFrame.Active = true
+				DropdownFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				DropdownFrame.BackgroundTransparency = 1
+				DropdownFrame.BorderSizePixel = 0
+				DropdownFrame.Position = UDim2.new(0, 0, 0, 0)
+				DropdownFrame.Size = UDim2.new(0, 300, 0, 35)
+				DropdownFrame.ClipsDescendants = true
+
+
+				UIListLayout.Parent = DropDownListFrame
+				UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+				UIListLayout.Padding = UDim.new(0, 0)
+
+				local IsTextBoxActing = false
+
+				DropdownFrame.MouseEnter:Connect(function()
+					if not IsTextBoxActing then
+						DropDownListFrame:TweenSize(UDim2.new(1,0,0,100),"Out","Quad",0.3,true,nil)
+						DropdownFrame:TweenSize(UDim2.new(0,300,0,135),"Out","Quad",0.3,true,nil)
+						TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.9})
+					end
+				end)
+
+				DropdownFrame.MouseLeave:Connect(function()
+					if not IsTextBoxActing then
+						DropDownListFrame:TweenSize(UDim2.new(1,0,0,0),"Out","Quad",0.3,true,nil)
+						DropdownFrame:TweenSize(UDim2.new(0,300,0,35),"Out","Quad",0.3,true,nil)
+						TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.95})
+					end
+				end)
+				Dropdown.Focused:Connect(function()
+					IsTextBoxActing = true
+					DropDownListFrame:TweenSize(UDim2.new(1,0,0,100),"Out","Quad",0.3,true,nil)
+					DropdownFrame:TweenSize(UDim2.new(0,300,0,135),"Out","Quad",0.3,true,nil)
+					TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.85})
+					TweenService:Create(Dropdown,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(255,255,255)})
+				end)
+
+				Dropdown.FocusLost:Connect(function()
+					IsTextBoxActing = false
+					DropDownListFrame:TweenSize(UDim2.new(1,0,0,0),"Out","Quad",0.3,true,nil)
+					DropdownFrame:TweenSize(UDim2.new(0,300,0,35),"Out","Quad",0.3,true,nil)
+					if not DropdownFrame.MouseEnter then
+						TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.95})
+					else
+						TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.90})
+					end
+					TweenService:Create(Dropdown,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(255,255,255)})
+				end)
+				local InsideDropdown = {}
+				function InsideDropdown.Choice(Text,callback)
+					local SelectButton = Instance.new("TextButton")
+
+					SelectButton.Name = Text
+					SelectButton.Parent = DropDownListFrame
+					SelectButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					SelectButton.BackgroundTransparency = 1
+					SelectButton.Size = UDim2.new(1, 0, 0, 35)
+					SelectButton.Font = Enum.Font.SourceSansSemibold
+					SelectButton.TextColor3 = Color3.fromRGB(152, 152, 152)
+					SelectButton.TextSize = 16.000
+					SelectButton.Text = Text
+					SelectButton.MouseButton1Click:Connect(function()
+						callback()
+					end)
+
+					SelectButton.MouseEnter:Connect(function()
+						TweenService:Create(SelectButton,TweenInfo.new(0.3),{BackgroundTransparency = 0.97}):Play()
+					end)
+					SelectButton.MouseLeave:Connect(function()
+						TweenService:Create(SelectButton,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
+					end)
+				end
+				return InsideDropdown,Dropdown;
+			end
 			return InsideFolder;
 		end
 		return InsideCategory;
