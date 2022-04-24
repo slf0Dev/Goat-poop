@@ -365,7 +365,7 @@ function Library.Main(Text,keycode)
 	end)
 
 	UICorner_4.Parent = ImageButton
-	
+
 	local dragging
 	local dragInput
 	local dragStart
@@ -404,8 +404,8 @@ function Library.Main(Text,keycode)
 			update(input)
 		end
 	end)
-	
-	
+
+
 
 	local InsideMain = {}
 
@@ -622,7 +622,7 @@ function Library.Main(Text,keycode)
 			FoldersComponents.ScrollBarImageTransparency = 0.7
 			FoldersComponents.CanvasSize = UDim2.new(0, 0, 0, 0)
 			FoldersComponents.ClipsDescendants = false
-			
+
 			empty.Name = "empty"
 			empty.Parent = FoldersComponents
 			empty.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -896,15 +896,15 @@ function Library.Main(Text,keycode)
 				Slider.TextSize = 15.000
 				Slider.TextXAlignment = Enum.TextXAlignment.Left
 				Slider.Text =  "    " .. Text
-				
+
 				SliderCorner.Parent = Slider
-				
+
 				SliderBorder.Parent = Slider
 				SliderBorder.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 				SliderBorder.LineJoinMode = "Round"
 				SliderBorder.Color = Color3.fromRGB(255,255,255)
 				SliderBorder.Transparency = 0.95
-				
+
 				SliderBase.Name = "SliderBase"
 				SliderBase.Parent = Slider
 				SliderBase.AnchorPoint = Vector2.new(0, 0.5)
@@ -982,7 +982,7 @@ function Library.Main(Text,keycode)
 						move(Pressed)
 					end
 				end)
-				
+
 				Slider.MouseEnter:Connect(function()
 					if not Dragging then
 						TweenService:Create(TextLabel,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(255,255,255)}):Play()
@@ -1002,6 +1002,76 @@ function Library.Main(Text,keycode)
 					end
 				end)
 				return Slider;
+			end
+			function InsideFolder.TextBox(placeholder,callback)
+				local TextBox = Instance.new("TextBox")
+				local UICorner = Instance.new("UICorner")
+				local SearchIcon = Instance.new("ImageLabel")
+				local BoxStroke = Instance.new("UIStroke")
+
+				TextBox.Parent = game.StarterGui.Library.Frame
+				TextBox.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+				TextBox.BorderSizePixel = 0
+				TextBox.Position = UDim2.new(0.290262163, 0, 0.303167433, 0)
+				TextBox.Size = UDim2.new(0, 300, 0, 35)
+				TextBox.Font = Enum.Font.SourceSansSemibold
+				TextBox.PlaceholderText = placeholder
+				TextBox.Text = ""
+				TextBox.TextColor3 = Color3.fromRGB(200, 200, 200)
+				TextBox.TextSize = 19.000
+
+				UICorner.Parent = TextBox
+
+				BoxStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+				BoxStroke.Color = Color3.fromRGB(255,255,255)
+				BoxStroke.LineJoinMode = Enum.LineJoinMode.Round
+				BoxStroke.Thickness = 1
+				BoxStroke.Transparency = 0.95
+
+				SearchIcon.Name = "SearchIcon"
+				SearchIcon.Parent = TextBox
+				SearchIcon.AnchorPoint = Vector2.new(0, 0.5)
+				SearchIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				SearchIcon.BackgroundTransparency = 1.000
+				SearchIcon.BorderSizePixel = 0
+				SearchIcon.Position = UDim2.new(0.889999986, 0, 0.5, 0)
+				SearchIcon.Size = UDim2.new(0, 20, 0, 20)
+				SearchIcon.Image = "rbxassetid://3926305904"
+				SearchIcon.ImageColor3 = Color3.fromRGB(165, 165, 165)
+				SearchIcon.ImageRectOffset = Vector2.new(164, 684)
+				SearchIcon.ImageRectSize = Vector2.new(36, 36)
+
+				local IsTextBoxActing = false
+
+				TextBox.MouseEnter:Connect(function()
+					if not IsTextBoxActing then
+						TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.9})
+					end
+				end)
+				
+				TextBox.MouseLeave:Connect(function()
+					if not IsTextBoxActing then
+						TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.95})
+					end
+				end)
+				TextBox.Focused:Connect(function()
+					IsTextBoxActing = true
+					TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.85})
+					TweenService:Create(TextBox,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(255,255,255)})
+				end)
+				
+				TextBox.FocusLost:Connect(function()
+					IsTextBoxActing = false
+					if not TextBox.MouseEnter then
+						TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.95})
+					else
+						TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.90})
+					end
+					TweenService:Create(TextBox,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(255,255,255)})
+					spawn(function() callback() end)
+				end)
+				
+				return TextBox;
 			end
 			return InsideFolder;
 		end
