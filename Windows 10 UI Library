@@ -857,6 +857,7 @@ function Library.Main(Text,keycode)
 				CircleCorner.Name = "CircleCorner"
 				CircleCorner.Parent = Circle
 				if not statement then
+				spawn(function() callback(true) end)
 					Circle:TweenPosition(UDim2.new(0.08,0,0.5,0),"Out","Quad",0.3,true,nil)
 					TweenService:Create(Circle,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(255,255,255)}):Play()
 					TweenService:Create(Circle,TweenInfo.new(0.3),{BackgroundTransparency = 0.8}):Play()
