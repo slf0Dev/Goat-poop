@@ -597,7 +597,7 @@ function Library.Main(Text,keycode)
 			local FolderDisplay = Instance.new("Frame")
 			local UIListLayout = Instance.new("UIListLayout")
 			local FolderButton = Instance.new("TextButton")
-			local FoldersComponents = Instance.new("Frame")
+			local FoldersComponents = Instance.new("ScrollingFrame")
 			local empty = Instance.new("Frame")
 
 			FolderDisplay.Name = Text
@@ -614,7 +614,10 @@ function Library.Main(Text,keycode)
 			FoldersComponents.BorderSizePixel = 0
 			FoldersComponents.Position = UDim2.new(0.1,0,0,0)
 			FoldersComponents.Size = UDim2.new(0.9, 0, 1, 0)
-
+			FoldersComponents.AutomaticCanvasSize = Enum.AutomaticSize.Y
+			FoldersComponents.ScrollBarThickness = 4
+			FoldersComponents.ScrollBarImageTransparency = 0.7
+			
 			empty.Name = "empty"
 			empty.Parent = FoldersComponents
 			empty.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
