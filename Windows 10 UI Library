@@ -1009,7 +1009,7 @@ function Library.Main(Text,keycode)
 				local SearchIcon = Instance.new("ImageLabel")
 				local BoxStroke = Instance.new("UIStroke")
 
-				TextBox.Parent = game.StarterGui.Library.Frame
+				TextBox.Parent = FoldersComponents
 				TextBox.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 				TextBox.BorderSizePixel = 0
 				TextBox.Position = UDim2.new(0.290262163, 0, 0.303167433, 0)
