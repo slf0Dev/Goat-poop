@@ -598,6 +598,7 @@ function Library.Main(Text,keycode)
 			local UIListLayout = Instance.new("UIListLayout")
 			local FolderButton = Instance.new("TextButton")
 			local FoldersComponents = Instance.new("Frame")
+			local empty = Instance.new("Frame")
 
 			FolderDisplay.Name = Text
 			FolderDisplay.Parent = Components
@@ -613,6 +614,14 @@ function Library.Main(Text,keycode)
 			FoldersComponents.BorderSizePixel = 0
 			FoldersComponents.Position = UDim2.new(0.1,0,0,0)
 			FoldersComponents.Size = UDim2.new(0.9, 0, 1, 0)
+
+			empty.Name = "empty"
+			empty.Parent = FoldersComponents
+			empty.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			empty.BackgroundTransparency = 1
+			empty.BorderSizePixel = 0
+			empty.Position = UDim2.new(0.1,0,0,0)
+			empty.Size = UDim2.new(0, 0, 0, 0)
 
 
 			UIListLayout.Parent = FoldersComponents
