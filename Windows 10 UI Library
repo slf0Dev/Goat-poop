@@ -606,6 +606,7 @@ function Library.Main(Text,keycode)
 			FolderDisplay.BackgroundTransparency = 1
 			FolderDisplay.BorderSizePixel = 0
 			FolderDisplay.Size = UDim2.new(0, 461, 0, 379)
+			FolderDisplay.ClipsDescendants = true
 
 			FoldersComponents.Name = "FolderComponents"
 			FoldersComponents.Parent = FolderDisplay
