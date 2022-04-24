@@ -106,6 +106,8 @@ function Library.Main(Text,keycode)
 
 	UIGridLayout.Parent = Folders
 	UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	UIGridLayout.VerticalAlignment = Enum.VerticalAlignment.Center
 
 	FindComponentsBox.Name = "FindComponentsBox"
 	FindComponentsBox.Parent = HomeFolder
