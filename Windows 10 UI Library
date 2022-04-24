@@ -869,6 +869,7 @@ function Library.Main(Text,keycode)
 					TweenService:Create(Circle,TweenInfo.new(0.3),{BackgroundTransparency = 0}):Play()
 					TweenService:Create(Toggle,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(255,255,255)}):Play()
 					Circle:TweenPosition(UDim2.new(0.64,0,0.5,0),"Out","Quad",0.3,true,nil)
+					spawn(function() callback() end)
 				end
 				return Toggle;
 			end
