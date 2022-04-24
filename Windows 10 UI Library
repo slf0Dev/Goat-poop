@@ -617,6 +617,7 @@ function Library.Main(Text,keycode)
 			FoldersComponents.AutomaticCanvasSize = Enum.AutomaticSize.Y
 			FoldersComponents.ScrollBarThickness = 4
 			FoldersComponents.ScrollBarImageTransparency = 0.7
+			FoldersComponents.CanvasSize = UDim2.new(0, 0, 0, 0)
 			
 			empty.Name = "empty"
 			empty.Parent = FoldersComponents
