@@ -1068,7 +1068,9 @@ function Library.Main(Text,keycode)
 						TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.90})
 					end
 					TweenService:Create(TextBox,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(255,255,255)})
-					spawn(function() callback() end)
+					if TextBox.Text ~= "" then
+						spawn(function() callback(TextBox.Text) end)
+					end
 				end)
 				
 				return TextBox;
