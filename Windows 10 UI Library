@@ -149,7 +149,7 @@ function Library.Main(Text,keycode)
 		spawn(function()
 			if TextBox.Text ~= "" then
 				for i,v in next,FoldersDisplay:GetDescendants() do
-					if v.Name:lower() == TextBox.Text:lower() and v.Parent and v.Parent.Name == "Components" then
+					if v.Name:lower():find(TextBox.Text:lower()) and v.Parent and v.Parent.Name == "Components" then
 						for c,d in next,v.Parent:GetChildren() do
 							if d.Name == "Pagess" then
 								d:JumpTo(v)
@@ -246,7 +246,7 @@ function Library.Main(Text,keycode)
 				SelectButton.Text = c.Name
 				SelectButton.MouseButton1Click:Connect(function()
 					for i,v in next,FoldersDisplay:GetDescendants() do
-						if v.Name == SelectButton.Text and v.Parent and v.Parent.Name == "Components" then
+						if v.Name:match(SelectButton.Text) and v.Parent and v.Parent.Name == "Components" then
 							for c,d in next,v.Parent:GetChildren() do
 								if d.Name == "Pagess" then
 									d:JumpTo(v)
@@ -1050,7 +1050,7 @@ function Library.Main(Text,keycode)
 						TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.9})
 					end
 				end)
-				
+
 				TextBox.MouseLeave:Connect(function()
 					if not IsTextBoxActing then
 						TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.95})
@@ -1061,7 +1061,7 @@ function Library.Main(Text,keycode)
 					TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.85})
 					TweenService:Create(TextBox,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(255,255,255)})
 				end)
-				
+
 				TextBox.FocusLost:Connect(function()
 					IsTextBoxActing = false
 					if not TextBox.MouseEnter then
@@ -1074,10 +1074,10 @@ function Library.Main(Text,keycode)
 						spawn(function() callback(TextBox.Text) end)
 					end
 				end)
-				
+
 				return TextBox;
 			end
-						function InsideFolder.Dropdown(placeholder)
+			function InsideFolder.Dropdown(placeholder)
 				local Dropdown = Instance.new("TextBox")
 				local DropdownFrame = Instance.new("Frame")
 				local UICorner = Instance.new("UICorner")
