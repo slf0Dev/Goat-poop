@@ -123,17 +123,17 @@ function Library.Loader(ScriptName,steps,EndFunc)
                 game:GetService("TweenService"):Create(LoadingStatusLabel,TweenInfo.new(0.3),{TextTransparency = 0}):Play()
             end
             if v == steps[#steps] then
-                wait(2)
+                wait(1)
                 Main:TweenSize(UDim2.new(0.2,0,0,0),"Out","Quart",0.5,true)
                 wait(0.6)
                 Loader:Destroy()
                 spawn(function() EndFunc() end)
             end
-            wait(2)
+            wait(1)
         end
     end)
     
-    while Main do wait(1)
+    while Main do wait(0.3)
         bar()
     end
     
