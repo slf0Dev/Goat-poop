@@ -4,7 +4,6 @@ local ms = game.Players.LocalPlayer:GetMouse()
 local Library = {}
 
 
-
 pcall(function()
 	for i,v in next,game.CoreGui:GetChildren() do
 		if v.Name == "LibraryUI" then
@@ -12,6 +11,135 @@ pcall(function()
 		end
 	end
 end)
+
+function Library.Loader(ScriptName,steps,EndFunc)
+    local Loader = Instance.new("ScreenGui")
+    local Main = Instance.new("Frame")
+    local ScriptNameLaberl = Instance.new("TextLabel")
+    local UIGradient = Instance.new("UIGradient")
+    local UICorner = Instance.new("UICorner")
+    local LoadingStatusLabel = Instance.new("TextLabel")
+    local LoadingBarFrame = Instance.new("Frame")
+    local UICorner_2 = Instance.new("UICorner")
+
+
+    Loader.Name = "Loader"
+    Loader.Parent = game.CoreGui
+    Loader.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+    Main.Name = "Main"
+    Main.Parent = Loader
+    Main.AnchorPoint = Vector2.new(0.5, 0.5)
+    Main.BackgroundColor3 = Color3.fromRGB(111, 111, 111)
+    Main.BorderSizePixel = 0
+    Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+    Main.Size = UDim2.new(0.2, 0, 0, 0)
+    Main.ClipsDescendants = true
+
+    ScriptNameLaberl.Name = "ScriptNameLaberl"
+    ScriptNameLaberl.Parent = Main
+    ScriptNameLaberl.AnchorPoint = Vector2.new(0.5, 0)
+    ScriptNameLaberl.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    ScriptNameLaberl.BackgroundTransparency = 1.000
+    ScriptNameLaberl.BorderSizePixel = 0
+    ScriptNameLaberl.Position = UDim2.new(0.5, 0, 0.0130000003, 0)
+    ScriptNameLaberl.Size = UDim2.new(0.602857172, 0, 0.0498338863, 0)
+    ScriptNameLaberl.Font = Enum.Font.SourceSansBold
+    ScriptNameLaberl.Text = ScriptName
+    ScriptNameLaberl.TextColor3 = Color3.fromRGB(212, 212, 212)
+    ScriptNameLaberl.TextScaled = true
+    ScriptNameLaberl.TextSize = 17.000
+    ScriptNameLaberl.TextWrapped = true
+    ScriptNameLaberl.AutoLocalize = false
+
+    UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 85, 127)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 170, 255))}
+    UIGradient.Rotation = 45
+    UIGradient.Parent = Main
+
+    UICorner.CornerRadius = UDim.new(0, 5)
+    UICorner.Parent = Main
+
+    LoadingStatusLabel.Name = "LoadingStatusLabel"
+    LoadingStatusLabel.Parent = Main
+    LoadingStatusLabel.AnchorPoint = Vector2.new(0.5, 0)
+    LoadingStatusLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    LoadingStatusLabel.BackgroundTransparency = 1.000
+    LoadingStatusLabel.BorderSizePixel = 0
+    LoadingStatusLabel.Position = UDim2.new(0.5, 0, 0.884066403, 0)
+    LoadingStatusLabel.Size = UDim2.new(0.91142863, 0, 0.0498338863, 0)
+    LoadingStatusLabel.Font = Enum.Font.SourceSansBold
+    for i,v in next,steps do
+        if i == 1 then
+            LoadingStatusLabel.Text = v
+        end
+    end
+    LoadingStatusLabel.TextColor3 = Color3.fromRGB(212, 212, 212)
+    LoadingStatusLabel.TextScaled = true
+    LoadingStatusLabel.TextSize = 16.000
+    LoadingStatusLabel.TextWrapped = false
+    LoadingStatusLabel.AutoLocalize = false
+
+    LoadingBarFrame.Name = "LoadingBarFrame"
+    LoadingBarFrame.Parent = Main
+    LoadingBarFrame.AnchorPoint = Vector2.new(0.5, 0)
+    LoadingBarFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    LoadingBarFrame.BackgroundTransparency = 0.750
+    LoadingBarFrame.BorderSizePixel = 0
+    LoadingBarFrame.ClipsDescendants = true
+    LoadingBarFrame.Position = UDim2.new(0.5, 0, 0.949999988, 0)
+    LoadingBarFrame.Size = UDim2.new(0.838857055, 0, 0.00999999978, 0)
+
+    UICorner_2.CornerRadius = UDim.new(0, 5)
+    UICorner_2.Parent = LoadingBarFrame
+
+    local function bar()
+        local bar = Instance.new("Frame")
+        local UICorner = Instance.new("UICorner")
+
+
+        bar.Name = "bar"
+        bar.Parent = LoadingBarFrame
+        bar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        bar.BackgroundTransparency = 0.550
+        bar.BorderSizePixel = 0
+        bar.Position = UDim2.new(-.1, 0, 0, 0)
+        bar.Size = UDim2.new(0.05, 0, 1, 0)
+
+        UICorner.CornerRadius = UDim.new(0, 5)
+        UICorner.Parent = bar
+        
+        bar:TweenPosition(UDim2.new(1,0,0,0),"Out","Linear",1,true,nil)
+        bar:TweenSize(UDim2.new(0.4,0,1,0),"Out","Linear",0.7,true,nil)
+        wait(1)
+        bar:Destroy()
+    end
+    Main:TweenSize(UDim2.new(0.2,0,0.4,0),"Out","Quart",0.5,true)
+    spawn(function()
+        for i,v in next,steps do
+            if i ~= 1 then
+                game:GetService("TweenService"):Create(LoadingStatusLabel,TweenInfo.new(0.3),{TextTransparency = 1}):Play()
+                wait(0.3)
+                LoadingStatusLabel.Text = v
+                game:GetService("TweenService"):Create(LoadingStatusLabel,TweenInfo.new(0.3),{TextTransparency = 0}):Play()
+            end
+            if v == steps[#steps] then
+                wait(2)
+                Main:TweenSize(UDim2.new(0.2,0,0,0),"Out","Quart",0.5,true)
+                wait(0.6)
+                Loader:Destroy()
+                spawn(function() EndFunc() end)
+            end
+            wait(2)
+        end
+    end)
+    
+    while Main do wait(1)
+        bar()
+    end
+    
+    
+    return Main;
+end
 
 function Library.Main(Text,keycode)
 
@@ -1077,7 +1205,7 @@ function Library.Main(Text,keycode)
 
 				return TextBox;
 			end
-			function InsideFolder.Dropdown(placeholder)
+			function InsideFolder.Dropdown(placeholder,IsMultiple)
 				local Dropdown = Instance.new("TextBox")
 				local DropdownFrame = Instance.new("Frame")
 				local UICorner = Instance.new("UICorner")
@@ -1096,10 +1224,13 @@ function Library.Main(Text,keycode)
 				Dropdown.Position = UDim2.new(0.5, 0, 0, 0)
 				Dropdown.Size = UDim2.new(0, 299, 0, 34)
 				Dropdown.Font = Enum.Font.SourceSansSemibold
-				Dropdown.PlaceholderText = placeholder
+				Dropdown.PlaceholderText = "  " .. placeholder
 				Dropdown.Text = ""
 				Dropdown.TextColor3 = Color3.fromRGB(200, 200, 200)
-				Dropdown.TextSize = 16.000
+				Dropdown.TextSize = 14.000
+                Dropdown.TextXAlignment = Enum.TextXAlignment.Center
+                Dropdown.TextScaled = false
+                Dropdown.TextWrapped = true
 
 				UICorner_10.Parent = DropdownFrame
 				UICorner_10.CornerRadius = UDim.new(0,8)
@@ -1190,28 +1321,91 @@ function Library.Main(Text,keycode)
 					TweenService:Create(Dropdown,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(255,255,255)})
 				end)
 				local InsideDropdown = {}
-				function InsideDropdown.Choice(Text,callback)
-					local SelectButton = Instance.new("TextButton")
+				function InsideDropdown.Choice(Text,callback,defaultbool)
+                    if not IsMultiple then
+                        local SelectButton = Instance.new("TextButton")
 
-					SelectButton.Name = Text
-					SelectButton.Parent = DropDownListFrame
-					SelectButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-					SelectButton.BackgroundTransparency = 1
-					SelectButton.Size = UDim2.new(1, 0, 0, 35)
-					SelectButton.Font = Enum.Font.SourceSansSemibold
-					SelectButton.TextColor3 = Color3.fromRGB(152, 152, 152)
-					SelectButton.TextSize = 16.000
-					SelectButton.Text = Text
-					SelectButton.MouseButton1Click:Connect(function()
-						callback()
-					end)
+                        SelectButton.Name = Text
+                        SelectButton.Parent = DropDownListFrame
+                        SelectButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                        SelectButton.BackgroundTransparency = 1
+                        SelectButton.Size = UDim2.new(1, 0, 0, 35)
+                        SelectButton.Font = Enum.Font.SourceSansSemibold
+                        SelectButton.TextColor3 = Color3.fromRGB(152, 152, 152)
+                        SelectButton.TextSize = 16.000
+                        SelectButton.Text = Text
+                        SelectButton.MouseButton1Click:Connect(function()
+                            spawn(function() callback() end)
 
-					SelectButton.MouseEnter:Connect(function()
-						TweenService:Create(SelectButton,TweenInfo.new(0.3),{BackgroundTransparency = 0.97}):Play()
-					end)
-					SelectButton.MouseLeave:Connect(function()
-						TweenService:Create(SelectButton,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
-					end)
+                            Dropdown.Text = Text
+                            IsTextBoxActing = false
+                            DropDownListFrame:TweenSize(UDim2.new(1,0,0,0),"Out","Quad",0.3,true,nil)
+                            DropdownFrame:TweenSize(UDim2.new(0,300,0,35),"Out","Quad",0.3,true,nil)
+                            if not DropdownFrame.MouseEnter then
+                                TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.95})
+                            else
+                                TweenService:Create(BoxStroke,TweenInfo.new(0.3),{Transparency = 0.90})
+                            end
+                            TweenService:Create(Dropdown,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(255,255,255)})
+                        end)
+
+                        SelectButton.MouseEnter:Connect(function()
+                            TweenService:Create(SelectButton,TweenInfo.new(0.3),{BackgroundTransparency = 0.97}):Play()
+                        end)
+                        SelectButton.MouseLeave:Connect(function()
+                            TweenService:Create(SelectButton,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
+                        end)
+                    else
+                        local SelectButton = Instance.new("TextButton")
+
+                        local IsChoiceSelected = defaultbool
+
+                        if defaultbool == true then
+                            spawn(function() callback(IsChoiceSelected) end)
+                            TweenService:Create(SelectButton,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(0,255,100)}):Play()
+                            Dropdown.Text = Dropdown.Text .. " ".. Text
+                        end
+                        SelectButton.Name = Text
+                        SelectButton.Parent = DropDownListFrame
+                        SelectButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                        SelectButton.BackgroundTransparency = 1
+                        SelectButton.Size = UDim2.new(1, 0, 0, 35)
+                        SelectButton.Font = Enum.Font.SourceSansSemibold
+                        SelectButton.TextColor3 = Color3.fromRGB(152, 152, 152)
+                        SelectButton.TextSize = 16.000
+                        SelectButton.Text = "  " .. Text
+                        SelectButton.TextXAlignment = Enum.TextXAlignment.Left
+                        SelectButton.MouseButton1Click:Connect(function()
+                            spawn(function() callback(IsChoiceSelected) end)
+                            if IsChoiceSelected then
+                                IsChoiceSelected = false
+                                TweenService:Create(Dropdown,TweenInfo.new(.15),{TextTransparency = 1}):Play()
+                                TweenService:Create(SelectButton,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(152,152,152)}):Play()
+                                wait(.15)
+                                if Dropdown.Text:find(Text) then
+                                        Dropdown.Text = Dropdown.Text:gsub(Text,"")
+                                end
+                                TweenService:Create(Dropdown,TweenInfo.new(.15),{TextTransparency = 0}):Play()
+                                if Dropdown.Text == "" then
+                                    Dropdown.Text = ""
+                                end
+                            else
+                                IsChoiceSelected = true
+                                TweenService:Create(SelectButton,TweenInfo.new(0.3),{TextColor3 = Color3.fromRGB(0,255,100)}):Play()
+                                TweenService:Create(Dropdown,TweenInfo.new(.15),{TextTransparency = 1}):Play()
+                                wait(.15)
+                                    Dropdown.Text = Dropdown.Text .. " ".. Text
+                                TweenService:Create(Dropdown,TweenInfo.new(.15),{TextTransparency = 0}):Play()
+                            end
+                        end)
+
+                        SelectButton.MouseEnter:Connect(function()
+                            TweenService:Create(SelectButton,TweenInfo.new(0.3),{BackgroundTransparency = 0.97}):Play()
+                        end)
+                        SelectButton.MouseLeave:Connect(function()
+                            TweenService:Create(SelectButton,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
+                        end)
+                    end
 				end
 				return InsideDropdown,Dropdown;
 			end
