@@ -2,7 +2,7 @@ local TweenService = game:GetService("TweenService")
 local InputService = game:GetService("UserInputService")
 local ms = game.Players.LocalPlayer:GetMouse()
 local Library = {}
-
+--d
 
 pcall(function()
 	for i,v in next,game.CoreGui:GetChildren() do
@@ -236,6 +236,7 @@ function Library.Main(Text,keycode)
 	UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
 	UIGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 	UIGridLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+    UIGridLayout.CellPadding = UDim2.new(0,10,0,10)
 
 	FindComponentsBox.Name = "FindComponentsBox"
 	FindComponentsBox.Parent = HomeFolder
